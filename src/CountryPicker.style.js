@@ -2,16 +2,25 @@ import { StyleSheet, PixelRatio } from 'react-native'
 import { getHeightPercent } from './ratio'
 
 export default StyleSheet.create({
-  container: {},
+  container: {
+  },
   modalContainer: {
+    flex: 1,
+    marginTop: 20,
+    marginBottom: 20,
+    marginLeft: 30,
+    marginRight: 30,
     backgroundColor: 'white',
-    flex: 1
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0
   },
   contentContainer: {
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    backgroundColor: 'white'
+    paddingRight: 20
   },
   header: {
     flexDirection: 'row',
@@ -25,14 +34,14 @@ export default StyleSheet.create({
     marginLeft: '15%'
   },
   touchFlag: {
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start'
-    // height: 19
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 19
   },
   imgStyle: {
     resizeMode: 'contain',
-    width: 25,
-    // height: 19,
+    width: 30,
+    height: 25,
     borderWidth: 1 / PixelRatio.get(),
     borderColor: '#eee',
     opacity: 0.8
@@ -41,8 +50,8 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     fontSize: 30,
-    // width: 30,
-    // height: 30,
+    width: 30,
+    height: 30,
     borderWidth: 1 / PixelRatio.get(),
     borderColor: 'transparent',
     backgroundColor: 'transparent'
@@ -52,24 +61,29 @@ export default StyleSheet.create({
     height: getHeightPercent(7),
     justifyContent: 'flex-start',
     alignItems: 'center',
-    paddingHorizontal: 5
+    marginLeft: 20,
+    marginRight: 20,
+    marginTop: 10,
   },
   itemCountryFlag: {
     justifyContent: 'center',
     alignItems: 'center',
-    // height: '7%',
+    height: '7%',
     width: '15%'
   },
   itemCountryName: {
-    justifyContent: 'space-between',
-    flexDirection: 'row',
     width: '100%',
-    borderBottomWidth: 2 / PixelRatio.get(),
-    borderBottomColor: '#ccc'
-
+    marginLeft: 15,
+    marginRight: 20,
+    justifyContent: 'center',
   },
   countryName: {
-    fontSize: getHeightPercent(2.2)
+    fontSize: 14,
+    color: 'black',
+    marginRight: 20,
+    justifyContent: 'center',
+    textAlign: 'left',
+    flexWrap: 'wrap',
   },
   countryCode: {
     textAlign: 'right'
@@ -94,14 +108,15 @@ export default StyleSheet.create({
     fontSize: getHeightPercent(2.2)
   },
   closeButton: {
-    height: 48,
-    width: '15%',
+    height: 25,
+    width: 35,
+    marginLeft: 15,
     alignItems: 'center',
     justifyContent: 'center'
   },
   closeButtonImage: {
-    height: 24,
-    width: 24,
+    height: 25,
+    width: 28,
     resizeMode: 'contain'
   }
 })
