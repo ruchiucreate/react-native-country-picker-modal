@@ -1,7 +1,7 @@
 // @flow
 import { Dimensions, Platform } from 'react-native'
 
-const { height } = Dimensions.get('window')
+const { height } = Dimensions.get('screen')
 
 // Remove the status bar height
 // since the modal view does not cover this area

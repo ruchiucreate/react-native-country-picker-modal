@@ -25,6 +25,7 @@ import { getHeightPercent } from './ratio'
 import CloseButton from './CloseButton'
 import countryPickerStyles from './CountryPicker.style'
 import KeyboardAvoidingView from './KeyboardAvoidingView'
+import colors from '../../../src/utilities/color.js';
 
 let countries = null
 let Emoji = null
@@ -70,11 +71,13 @@ export default class CountryPicker extends Component {
     styles: PropTypes.object,
     filterPlaceholder: PropTypes.string,
     autoFocusFilter: PropTypes.bool,
+    underlineColor: PropTypes.string,
     // to provide a functionality to disable/enable the onPress of Country Picker.
     disabled: PropTypes.bool,
     filterPlaceholderTextColor: PropTypes.string,
     closeButtonImage: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
     transparent: PropTypes.bool,
+    title: PropTypes.string,
     animationType: PropTypes.oneOf(['slide', 'fade', 'none']),
     flagType: PropTypes.oneOf(Object.values(FLAG_TYPES)),
     hideAlphabetFilter: PropTypes.bool,
@@ -93,7 +96,10 @@ export default class CountryPicker extends Component {
     filterPlaceholder: 'Filter',
     autoFocusFilter: true,
     transparent: false,
-    animationType: 'none'
+    title: 'Select a country',
+    animationType: 'none',
+    underlineColor: 'black',
+    titleTextStyle: {color: 'white', fontSize: 18},
   }
 
   static renderEmojiFlag(cca2, emojiStyle) {
@@ -378,6 +384,8 @@ export default class CountryPicker extends Component {
     return (
       <View style={styles.container}>
         <TouchableOpacity
+          style={{borderBottomWidth: 0.5,
+          borderColor: this.props.underlineColor}}
           disabled={this.props.disabled}
           onPress={() => this.setState({ modalVisible: true })}
           activeOpacity={0.7}
@@ -406,8 +414,21 @@ export default class CountryPicker extends Component {
           visible={this.state.modalVisible}
           onRequestClose={() => this.setState({ modalVisible: false })}
         >
-          <View style={{ flex: 1, backgroundColor: 'black', opacity: 0.4 }} />
-          <SafeAreaView style={styles.modalContainer}>
+          <View style={{ flex: 1, backgroundColor: 'black', opacity: 0.4 }}/>
+          <View style={styles.modalContainer}>
+            <View style={{height: 45, backgroundColor: colors.navigationBarBackgroundColor,
+               justifyContent: 'center',alignItems: 'center', 
+               borderTopLeftRadius: 5, borderTopRightRadius: 5}}>
+               <Text style={this.props.titleTextStyle}>
+                 {this.props.title}
+                 </Text> 
+                 <TouchableOpacity style={{position: 'absolute', right: 10}} onPress={() => this.setState({modalVisible: false})}
+                 hitSlop={{top: 5,left: 5,bottom: 5,right: 5}}>
+                  <Image source={require('./ic_close.png')}
+                  style={{height: 25, width: 25}}
+                  resizeMode="stretch"/>
+                 </TouchableOpacity>
+            </View>
             <View style={styles.header}>
               {this.props.closeable && (
                 <View pointerEvents="none">
@@ -423,6 +444,7 @@ export default class CountryPicker extends Component {
             <KeyboardAvoidingView behavior="padding">
               <View style={styles.contentContainer}>
                 <FlatList
+                  contentContainerStyle={{flexGrow: 1}}
                   data={this.state.flatListMap}
                   ref={flatList => (this._flatList = flatList)}
                   initialNumToRender={30}
@@ -432,7 +454,7 @@ export default class CountryPicker extends Component {
                 />
               </View>
             </KeyboardAvoidingView>
-          </SafeAreaView>
+          </View>
         </Modal>
       </View>
     )

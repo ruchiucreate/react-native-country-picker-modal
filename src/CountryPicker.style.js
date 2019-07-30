@@ -2,25 +2,28 @@ import { StyleSheet, PixelRatio } from 'react-native'
 import { getHeightPercent } from './ratio'
 
 export default StyleSheet.create({
-  container: {
-  },
   modalContainer: {
     flex: 1,
-    marginTop: 20,
-    marginBottom: 20,
-    marginLeft: 30,
-    marginRight: 30,
+    marginHorizontal: 30,
+    shadowOffset: {
+      height: 5,
+      width: 5,
+  },
+  shadowRadius: 5,
+  shadowOpacity: 0.2,
+  borderRadius: 5,
     backgroundColor: 'white',
     position: 'absolute',
-    top: 0,
-    bottom: 0,
+    top: getHeightPercent(7),
+    bottom: getHeightPercent(7),
     left: 0,
     right: 0
   },
   contentContainer: {
     flex: 1,
     flexDirection: 'row',
-    paddingRight: 20
+    paddingRight: 20,
+    paddingBottom: 10
   },
   header: {
     flexDirection: 'row',
@@ -58,12 +61,11 @@ export default StyleSheet.create({
   },
   itemCountry: {
     flexDirection: 'row',
-    height: getHeightPercent(7),
+    height: 45,
     justifyContent: 'flex-start',
     alignItems: 'center',
     marginLeft: 20,
     marginRight: 20,
-    marginTop: 10,
   },
   itemCountryFlag: {
     justifyContent: 'center',
